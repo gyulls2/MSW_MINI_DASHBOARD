@@ -25,66 +25,80 @@ const LineChart = ({ from, to }) => {
   const [lineData, setLineData] = useState({});
 
   useEffect(() => {
-    fetch(`/timeseries?from=${from}&to=${to}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Bad request body.");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setLineData({
-          name: data.name,
-          unit: data.unit,
-          data: data.data,
-          times: data.times,
+    const fetchLineData = async () => {
+      fetch(`/timeseries?from=${from}&to=${to}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Bad request body.");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // 서버로부터 받은 데이터 처리
+          setLineData({
+            name: data.name,
+            unit: data.unit,
+            data: data.data,
+            times: data.times,
+          });
+          console.log(lineData.times);
+          console.log(`Name: ${data.name}`);
+          console.log(`Unit: ${data.unit}`);
+          console.log(`Data: ${data.data}`); // 시계열 데이터 배열
+          console.log(`Times: ${data.times}`); // Unix Time 배열
+        })
+        .catch((error) => {
+          console.error("There was a problem with the fetch operation:", error);
         });
-        // 서버로부터 받은 데이터 처리
-        console.log(`Name: ${data.name}`);
-        console.log(`Unit: ${data.unit}`);
-        console.log(`Data: ${data.data}`); // 시계열 데이터 배열
-        console.log(`Times: ${data.times}`); // Unix Time 배열
-      })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-      });
+    };
+    fetchLineData();
   }, []);
 
   const options = {
     responsive: true,
     plugins: {
       legend: {
-        position: "top",
+        display: false,
       },
       title: {
         display: true,
-        text: "Chart.js Line Chart",
+        text: lineData.name,
+      },
+      tooltips: {
+        callbacks: {
+          title: function title(tooltipItem, data) {
+            var title = data.labels[tooltipItem.index];
+            return title;
+          },
+        },
       },
     },
   };
 
-  const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-  ];
+  const labels =
+    lineData &&
+    lineData?.times?.map((item) => timeFormat(new Date(item * 1000)));
+
+  function timeFormat(date) {
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+    let second = date.getSeconds();
+
+    hour = hour >= 10 ? hour : "0" + hour;
+    minute = minute >= 10 ? minute : "0" + minute;
+    second = second >= 10 ? second : "0" + second;
+
+    return hour + ":" + minute + ":" + second;
+  }
 
   const data = {
     labels,
     datasets: [
       {
-        label: "Dataset 1",
+        label: lineData.name,
         data: lineData.data,
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
-      },
-      {
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
   };

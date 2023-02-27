@@ -6,7 +6,6 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const PieChart = ({ from, to }) => {
   const [pieData, setPieData] = useState({});
-  const [chartData, setChartData] = useState({});
 
   useEffect(() => {
     const fetchPieData = async () => {
@@ -19,9 +18,6 @@ const PieChart = ({ from, to }) => {
         })
         .then((data) => {
           setPieData(data);
-          console.log(data);
-
-          console.log(pieData.data);
         })
         .catch((error) => {
           console.error("There was a problem with the fetch operation:", error);
