@@ -24,7 +24,7 @@ const PieChart = ({ from, to }) => {
         });
     };
     fetchPieData();
-  }, []);
+  }, [from, to]);
 
   const data = {
     labels: pieData && pieData?.data?.map((item) => item.name),

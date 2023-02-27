@@ -41,7 +41,6 @@ const LineChart = ({ from, to }) => {
             data: data.data,
             times: data.times,
           });
-          console.log(lineData.times);
           console.log(`Name: ${data.name}`);
           console.log(`Unit: ${data.unit}`);
           console.log(`Data: ${data.data}`); // 시계열 데이터 배열
@@ -52,7 +51,7 @@ const LineChart = ({ from, to }) => {
         });
     };
     fetchLineData();
-  }, []);
+  }, [from, to]);
 
   const options = {
     responsive: true,
@@ -64,6 +63,7 @@ const LineChart = ({ from, to }) => {
         display: true,
         text: lineData.name,
       },
+      // 툴팁 수정하기
       tooltips: {
         callbacks: {
           title: function title(tooltipItem, data) {

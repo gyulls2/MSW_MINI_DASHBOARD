@@ -19,9 +19,9 @@ const ValueChart = ({ from, to }) => {
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
-  }, []);
+  }, [from, to]);
 
-  return <div>{valueData.value}</div>
+  return <div>{valueData.value}Mib</div>
 };
 
 export default ValueChart;
