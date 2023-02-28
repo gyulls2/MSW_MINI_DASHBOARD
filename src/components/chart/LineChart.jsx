@@ -105,7 +105,6 @@ const LineChart = ({ from, to }) => {
 
   return (
     <div>
-      <h1>왜 안돼~~</h1>
       <Line options={options} data={data} />
     </div>
   );

@@ -27,7 +27,8 @@ export const valueResolver = (req, res, ctx) => {
   if (from === null || to === null || from >= to) {
     return res(ctx.status(422), ctx.json({ errorMessage: 'Bad request body.' }));
   }
-  const interval = 10 * 1000;
+  // const interval = 10 * 1000;
+  const interval = 10 * 10;
   const standardToFrom = from - standardStartTime;
   const indexFrom = Math.ceil(standardToFrom % 360);
   const resultValue = { name: 'service', unit: 'bytes', value: 0 };
