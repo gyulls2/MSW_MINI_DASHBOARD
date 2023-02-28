@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Draggable from "react-draggable";
 
 const ValueChart = ({ from, to }) => {
   const [valueData, setValueData] = useState({});
@@ -21,7 +22,19 @@ const ValueChart = ({ from, to }) => {
       });
   }, [from, to]);
 
-  return <div>{valueData.value}Mib</div>
+  return (
+    <Draggable
+      axis="both"
+      handle=".handle"
+      defaultPosition={{ x: 0, y: 0 }}
+      position={null}
+      scale={1}
+    >
+      <div className="chartContainer">
+        <div className="handle">{valueData.value}Mib</div>
+      </div>
+    </Draggable>
+  );
 };
 
 export default ValueChart;

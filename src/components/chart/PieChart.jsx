@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import Draggable from "react-draggable";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -61,9 +62,19 @@ const PieChart = ({ from, to }) => {
   };
 
   return (
-    <div>
-      <Doughnut data={data} height={400} options={options} />
-    </div>
+    <Draggable
+      axis="both"
+      handle=".handle"
+      defaultPosition={{ x: 0, y: 0 }}
+      position={null}
+      scale={1}
+    >
+      <div className="chartContainer">
+        <div className="handle">
+          <Doughnut data={data} height={400} options={options} />
+        </div>
+      </div>
+    </Draggable>
   );
 };
 

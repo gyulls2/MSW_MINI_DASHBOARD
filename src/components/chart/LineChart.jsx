@@ -10,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import Draggable from "react-draggable";
 
 ChartJS.register(
   CategoryScale,
@@ -103,10 +104,30 @@ const LineChart = ({ from, to }) => {
     ],
   };
 
+  const state = {
+    width: 200,
+    height: 200,
+  };
+
+  // On top layout
+  const onResize = (event, { element, size, handle }) => {
+    this.setState({ width: size.width, height: size.height });
+  };
+
   return (
-    <div>
-      <Line options={options} data={data} />
-    </div>
+    <Draggable
+      axis="both"
+      handle=".handle"
+      defaultPosition={{ x: 0, y: 0 }}
+      position={null}
+      scale={1}
+    >
+      <div className="chartContainer">
+        <div className="handle">
+          <Line options={options} data={data} />
+        </div>
+      </div>
+    </Draggable>
   );
 };
 
