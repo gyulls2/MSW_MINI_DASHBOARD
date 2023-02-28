@@ -98,20 +98,10 @@ const LineChart = ({ from, to }) => {
       {
         label: lineData.name,
         data: lineData.data,
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderColor: "rgb(79, 121, 225)",
+        backgroundColor: "rgba(79, 121, 225, 0.5)",
       },
     ],
-  };
-
-  const state = {
-    width: 200,
-    height: 200,
-  };
-
-  // On top layout
-  const onResize = (event, { element, size, handle }) => {
-    this.setState({ width: size.width, height: size.height });
   };
 
   return (
@@ -122,7 +112,7 @@ const LineChart = ({ from, to }) => {
       position={null}
       scale={1}
     >
-      <div className="chartContainer">
+      <div className="chartContainer line">
         <div className="handle">
           <Line options={options} data={data} />
         </div>

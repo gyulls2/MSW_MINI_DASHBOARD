@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
+import styled from "styled-components";
 
 const ValueChart = ({ from, to }) => {
   const [valueData, setValueData] = useState({});
@@ -22,6 +23,21 @@ const ValueChart = ({ from, to }) => {
       });
   }, [from, to]);
 
+  // styled-components
+  const StyledP = styled.p`
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  `;
+
+  const Span = styled.span`
+    font-size: 5rem;
+    color: ${valueData.value >= 500 ? "#E9533D" : "#222"};
+  `;
+
   return (
     <Draggable
       axis="both"
@@ -30,8 +46,12 @@ const ValueChart = ({ from, to }) => {
       position={null}
       scale={1}
     >
-      <div className="chartContainer">
-        <div className="handle">{valueData.value}Mib</div>
+      <div className="chartContainer value">
+        <div className="handle">
+          <StyledP>
+            <Span>{valueData.value}</Span> Mib
+          </StyledP>
+        </div>
       </div>
     </Draggable>
   );

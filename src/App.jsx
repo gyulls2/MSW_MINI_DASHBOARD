@@ -37,10 +37,15 @@ function App() {
 
   return (
     <div className="App">
-      <TimeSelector timeSelectorHandler={timeSelectorHandler} />
-      <LineChart from={from} to={to} />
-      <PieChart from={from} to={to} />
-      <ValueChart from={from} to={to} />
+      <section className="controllerSection">
+        <TimeSelector timeSelectorHandler={timeSelectorHandler} />
+      </section>
+      
+      <section className="dashboardSection">
+        <LineChart from={from} to={to} />
+        <PieChart from={from} to={to} />
+        <ValueChart from={from} to={to} />
+      </section>
     </div>
   );
 }
