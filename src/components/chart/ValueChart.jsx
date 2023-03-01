@@ -23,20 +23,10 @@ const ValueChart = ({ from, to }) => {
       });
   }, [from, to]);
 
-  // styled-components
-  const StyledP = styled.p`
-    font-size: 3rem;
-    font-weight: bold;
-    text-align: center;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-  `;
-
-  const Span = styled.span`
-    font-size: 5rem;
-    color: ${valueData.value >= 500 ? "#E9533D" : "#222"};
-  `;
+  const spanStyle = {
+    color: valueData.value >= 500 ? "#E9533D" : "#222",
+    fontSize: "5rem",
+  };
 
   return (
     <Draggable
@@ -46,10 +36,10 @@ const ValueChart = ({ from, to }) => {
       position={null}
       scale={1}
     >
-      <div className="chartContainer value">
+      <div className="chartContainer">
         <div className="handle">
           <StyledP>
-            <Span>{valueData.value}</Span> Mib
+            <span style={spanStyle}>{valueData.value}</span> Mib
           </StyledP>
         </div>
       </div>
@@ -58,3 +48,13 @@ const ValueChart = ({ from, to }) => {
 };
 
 export default ValueChart;
+
+// styled-components
+const StyledP = styled.p`
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+`;

@@ -24,10 +24,9 @@ const TimeSelector = ({ timeSelectorHandler }) => {
     else return timeSelectorHandler(600);
   }
 
-
   return (
     <div>
-      <Box sx={{ width: 300 }}>
+      <Box sx={{ width: "90%", marginBottom: "50px" }}>
         <Slider
           aria-label="Restricted values"
           defaultValue={100}

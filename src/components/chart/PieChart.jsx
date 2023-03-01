@@ -72,7 +72,7 @@ const PieChart = ({ from, to }) => {
       position={null}
       scale={1}
     >
-      <div className="chartContainer pie">
+      <div className="chartContainer">
         <div className="handle">
           <Doughnut data={data} height={400} options={options} />
         </div>
