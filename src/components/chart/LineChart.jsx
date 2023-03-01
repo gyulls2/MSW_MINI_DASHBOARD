@@ -42,10 +42,6 @@ const LineChart = ({ from, to }) => {
             data: data.data,
             times: data.times,
           });
-          console.log(`Name: ${data.name}`);
-          console.log(`Unit: ${data.unit}`);
-          console.log(`Data: ${data.data}`); // 시계열 데이터 배열
-          console.log(`Times: ${data.times}`); // Unix Time 배열
         })
         .catch((error) => {
           console.error("There was a problem with the fetch operation:", error);
@@ -63,15 +59,6 @@ const LineChart = ({ from, to }) => {
       title: {
         display: true,
         text: lineData.name,
-      },
-      // 툴팁 수정하기
-      tooltips: {
-        callbacks: {
-          title: function title(tooltipItem, data) {
-            var title = data.labels[tooltipItem.index];
-            return title;
-          },
-        },
       },
     },
   };

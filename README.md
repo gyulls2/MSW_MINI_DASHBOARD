@@ -1,26 +1,22 @@
-# MSW_MINI_DASHBOARD
-
 ## 1. 실행 방법
 
 1. 레포지토리 클론
 
-  ```jsx
-   `git clone https://github.com/gyulls2/MSW_MINI_DASHBOARD.git`
-  ```
+```jsx
+ $ git clone https://github.com/gyulls2/MSW_MINI_DASHBOARD.git
+```
 
-2. 패키지 다운
+2. 패키지 다운로드
 
-  ```jsx
-   `npm i`
-  ```
-
+```jsx
+ $ npm i
+```
 
 3. 실행
 
-  ```jsx
-   `npm run start`
-  ```
-
+```jsx
+ $ npm run start
+```
 
 ## 2. 개요
 
@@ -60,16 +56,16 @@
   ```
 
 - MSW 서버 구동 테스트 : `fetch()`
-  - 데이터 콘솔에 출력 확인
-    💥 라인 차트 → 시간 범위에 따라 데이터 개수가 너무 적게 출력되는 이슈 발생(#error1)
+  - 데이터 콘솔에 출력 확인<br/>
+    [💥 라인 차트 → 시간 범위에 따라 데이터 개수가 너무 적게 출력되는 이슈 발생](#error1)
     > 시간 범위가 하루일 때 : 데이터 9개 출력, 시간 범위가 한 시간일 때 : 데이터 1개 출력
     > ⇒ 시간 범위에 따라 데이터 개수가 부족할 때, 차트가 그려지지 않는 문제가 발생하기 때문에 데이터 수를 늘려서 해결하였다.
   - `resolver` 폴더 파일들의 `interval` 변수 값 수정
 
 **📍 02.28**
 
-- line, pie, value 차트 구현 : `Chart.js`
-  💥 비동기처리 이슈(#error2)
+- line, pie, value 차트 구현 : `Chart.js`<br/>
+  [💥 비동기처리 이슈](#error2)
 
   > Cannot read property 'map' of undefined.
 
@@ -80,8 +76,8 @@
   labels: pieData && pieData?.data?.map((item) => item.name);
   ```
 
-- 10초마다 차트 데이터 갱신 기능 : `useInterval`(custom hook)
-  💥 setInterval 이슈(#error3)
+- 10초마다 차트 데이터 갱신 기능 : `useInterval`(custom hook)<br/>
+  [💥 setInterval 이슈](#error3)
   > setInterval이 일정 시간마다 작업을 수행하려 렌더링 될 때마다 useState의 값이 초기값으로 다시 세팅되는 이슈가 발생했다(setInterval 실행시 내부에 클로저가 발생). 이를 해결하기 위해 업데이트 된 state를 반영할 수 있는 커스텀 훅 `useInterval`을 사용하여 해결하였다.
 - 시간 범위 selector 기능 : `MUI 라이브러리`(UI)
 
@@ -225,7 +221,7 @@ useInterval(() => {
 
 ## 6. 참고 문서
 
-- msw 모킹
+- **msw 모킹**
 
 [Mocking REST API - Getting Started](https://mswjs.io/docs/getting-started/mocks/rest-api)
 
@@ -233,11 +229,11 @@ useInterval(() => {
 
 [MSW로 백앤드 API 모킹하기](https://www.daleseo.com/mock-service-worker/)
 
-- Fetch 함수
+- **Fetch 함수**
 
 [Using the Fetch API - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
 
-- chart.js
+- **chart.js**
 
 [Integrate Chart.js Using React with Data from a REST API (2022)](https://www.youtube.com/watch?v=yOousFGfmZc)
 

@@ -15,8 +15,6 @@ const ValueChart = ({ from, to }) => {
       })
       .then((data) => {
         setValueData(data);
-        console.log(`value Name: ${data.name}`);
-        console.log(`Value: ${data.value}`);
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);

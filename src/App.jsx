@@ -10,12 +10,10 @@ import styled from "styled-components";
 import CurrentTime from "./components/timeSelector/CurrentTime";
 
 function App() {
-  // const from = 1646035200; // 2022-02-28 00:00:00 UTC
-  // const to = 1646118000; // 2022-03-01 00:00:00 UTC
-
   const [sec, setSec] = useState(0);
-  const [from, setFrom] = useState(() => startTime()); // 1시간 전부터 데이터 가져오기
-  const [to, setTo] = useState(() => currentTime()); // 현재 시간까지 데이터 가져오기
+  const [from, setFrom] = useState(() => startTime()); // n분 전부터 (초기값:60분)
+  const [to, setTo] = useState(() => currentTime()); // 현재 시간까지의 데이터 가져오기
+
   const lineRef = useRef();
   const pieRef = useRef();
   const valueRef = useRef();

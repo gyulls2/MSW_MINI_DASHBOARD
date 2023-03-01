@@ -19,6 +19,7 @@ const TimeSelector = ({ timeSelectorHandler }) => {
   ];
 
   function getTimeValue(e) {
+    // 분 -> 초로 변환해서 timeSelectorHandler의 매개변수로 넘겨준다
     if (e.target.value === 100) return timeSelectorHandler(3600);
     else if (e.target.value === 50) return timeSelectorHandler(1800);
     else return timeSelectorHandler(600);

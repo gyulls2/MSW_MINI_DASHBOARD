@@ -31,6 +31,7 @@ const CurrentTime = () => {
 
 export default CurrentTime;
 
+// styled-components
 const Time = styled.div`
   font-size: 2.5rem;
   margin-bottom: 40px;
