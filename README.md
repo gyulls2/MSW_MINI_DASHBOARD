@@ -1,18 +1,26 @@
+# MSW_MINI_DASHBOARD
+
 ## 1. 실행 방법
 
 1. 레포지토리 클론
 
+  ```jsx
    `git clone https://github.com/gyulls2/MSW_MINI_DASHBOARD.git`
+  ```
 
 2. 패키지 다운
 
+  ```jsx
    `npm i`
+  ```
+
 
 3. 실행
 
+  ```jsx
    `npm run start`
+  ```
 
----
 
 ## 2. 개요
 
@@ -25,8 +33,6 @@
   - 마우스 드래그 앤 드롭으로 차트의 위치와 크기를 원하는 대로 조작할 수 있습니다.
 - 기술 스택
   - React, Javascript, Chart.js, Styled-components, MUI
-
----
 
 ## 3. 작업 기록
 
@@ -41,34 +47,41 @@
 - MSW(Mock Service Worker) 라이브러리 설치
 - 서비스 워커 생성 : `setupWorker()`
   💥 `handler.js` 파일 작동 시 다음과 같은 오류 발생
+
   > Uncaught Invariant Violation: [MSW] Failed to construct "SetupWorkerApi" given an Array of request handlers. `Make sure you spread the request handlers` when calling the respective setup function.
+
   - `SetupWorkerApi` 생성자가 Array 형태의 request handlers를 받을 때, 스프레드 연산자를 사용하지 않으면 오류가 발생할 수 있음.
+
   ```jsx
   export const handlers = [chartHandlers];
 
   // 스프레드 연산자를 사용하여 수정
   export const handlers = [...chartHandlers];
   ```
+
 - MSW 서버 구동 테스트 : `fetch()`
   - 데이터 콘솔에 출력 확인
-  💥 라인 차트 → 시간 범위에 따라 데이터 개수가 너무 적게 출력되는 이슈 발생
-  > 시간 범위가 하루일 때 : 데이터 9개 출력, 시간 범위가 한 시간일 때 : 데이터 1개 출력
-  > ⇒ 시간 범위에 따라 데이터 개수가 부족할 때, 차트가 그려지지 않는 문제가 발생하기 때문에 데이터 수를 늘려서 해결하였다.
+    💥 라인 차트 → 시간 범위에 따라 데이터 개수가 너무 적게 출력되는 이슈 발생(#error1)
+    > 시간 범위가 하루일 때 : 데이터 9개 출력, 시간 범위가 한 시간일 때 : 데이터 1개 출력
+    > ⇒ 시간 범위에 따라 데이터 개수가 부족할 때, 차트가 그려지지 않는 문제가 발생하기 때문에 데이터 수를 늘려서 해결하였다.
   - `resolver` 폴더 파일들의 `interval` 변수 값 수정
 
 **📍 02.28**
 
 - line, pie, value 차트 구현 : `Chart.js`
-  💥 비동기처리 이슈
+  💥 비동기처리 이슈(#error2)
+
   > Cannot read property 'map' of undefined.
+
   ```jsx
   labels: pieData.data.map((item) => item.name);
 
   // pieData.data에 데이터가 존재해야 map함수를 실행하도록 수정
   labels: pieData && pieData?.data?.map((item) => item.name);
   ```
+
 - 10초마다 차트 데이터 갱신 기능 : `useInterval`(custom hook)
-  💥 setInterval 이슈
+  💥 setInterval 이슈(#error3)
   > setInterval이 일정 시간마다 작업을 수행하려 렌더링 될 때마다 useState의 값이 초기값으로 다시 세팅되는 이슈가 발생했다(setInterval 실행시 내부에 클로저가 발생). 이를 해결하기 위해 업데이트 된 state를 반영할 수 있는 커스텀 훅 `useInterval`을 사용하여 해결하였다.
 - 시간 범위 selector 기능 : `MUI 라이브러리`(UI)
 
@@ -80,11 +93,16 @@
 - 컴포넌트 스타일링 : `styled-components`
 - readme 작성
 
----
-
 ## 4. 트러블 슈팅
 
-### **📍 React 실행오류 Cannot read property 'map' of undefined(비동기처리)**
+### <span id="error1">📍 시간 범위에 따라 데이터 개수가 너무 적게 출력되는 이슈</span>
+
+- GET /timeseries API 의 응답 데이터를 출력한 결과 시간 범위가 하루일 때 데이터 9개 출력되었고, 시간 범위가 한 시간일 때는 데이터가 1개 밖에 출력되지 않아 차트가 그려지지 않는 이슈가 발생했다.
+- `resolver` 폴더 `timeseries.js`파일의 `interval` 변수 값을 수정했다.
+- `interval` 변수는 10\*1000의 값으로 설정되어 있다. 10초를 밀리초로 변환한 값이며, 데이터가 10초 간격으로 기록되었음을 의미한다.
+- `interval` 의 값을 0.1\*1000로 수정하였다. 1시간, 30분, 10분 간격으로 시간 범위를 설정하여도 데이터가 여러 개가 출력될 수 있도록 기록 시간을 0.1초로 바꿔주었다.
+
+### <span id="error2">📍 React 실행오류 Cannot read property 'map' of undefined(비동기처리)</span>
 
 - 응답 데이터를 받아 chart의 라벨로 뿌려주는 코드를 작성했다. map 함수를 사용해 원하는 데이터를 추출하고자 했는데 다음과 같은 실행오류 발생.
 
@@ -100,14 +118,7 @@ labels: pieData.data.map((item) => item.name);
 labels: pieData.data?.map((item) => item.name);
 ```
 
-### **📍** 시간 범위에 따라 데이터 개수가 너무 적게 출력되는 이슈
-
-- GET /timeseries API 의 응답 데이터를 출력한 결과 시간 범위가 하루일 때 데이터 9개 출력되었고, 시간 범위가 한 시간일 때는 데이터가 1개 밖에 출력되지 않아 차트가 그려지지 않는 이슈가 발생했다.
-- `resolver` 폴더 `timeseries.js`파일의 `interval` 변수 값을 수정했다.
-- `interval` 변수는 10\*1000의 값으로 설정되어 있다. 10초를 밀리초로 변환한 값이며, 데이터가 10초 간격으로 기록되었음을 의미한다.
-- `interval` 의 값을 0.1\*1000로 수정하였다. 1시간, 30분, 10분 간격으로 시간 범위를 설정하여도 데이터가 여러 개가 출력될 수 있도록 기록 시간을 0.1초로 바꿔주었다.
-
-### **📍** setInterval 이슈
+### <span id="error3">📍 setInterval 이슈</span>
 
 - 10초마다 차트 데이터를 갱신하는 기능을 구현하기 위해 setInterval 함수를 사용하여 코드를 작성했다.
 - 문제는 시간 범위 selector의 값을 저장하기 위해 useState를 사용하였고, setInterval이 일정 시간마다 작업을 수행하려 렌더링 될 때마다 useState의 값이 초기값으로 다시 세팅되는 이슈가 발생했다. 이 문제 때문에 시간 범위 selector를 30분으로 조정하여도 10초 후 다시 초기값인 1시간 범위로 돌아가는 문제가 생겼다.
@@ -167,8 +178,6 @@ useInterval(() => {
 }, 10000);
 ```
 
----
-
 ## 4. 컴포넌트 구조
 
 ```
@@ -200,8 +209,6 @@ useInterval(() => {
  ┗ 📜index.js
 ```
 
----
-
 ## 5. 커밋 컨벤션
 
 | Feat     | 새로운 기능을 추가할 경우                                                 |
@@ -215,8 +222,6 @@ useInterval(() => {
 | Chore    | 빌드 테스트 업데이트, 패키지 매니저를 설정하는 경우(프로덕션 코드 변경 X) |
 | Rename   | 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우                        |
 | Remove   | 파일을 삭제하는 작업만 수행한 경우                                        |
-
----
 
 ## 6. 참고 문서
 
@@ -242,7 +247,7 @@ useInterval(() => {
 
 [[오류해결] TypeError: Cannot read property 'map' of undefined](https://velog.io/@dum6894/오류해결-TypeError-Cannot-read-property-map-of-undefined)
 
-- \***\*setInterval\*\***
+- **setInterval**
 
 [Hook 자주 묻는 질문 – React](https://ko.reactjs.org/docs/hooks-faq.html#what-can-i-do-if-my-effect-dependencies-change-too-often)
 
