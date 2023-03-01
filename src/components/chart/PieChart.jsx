@@ -28,11 +28,11 @@ const PieChart = ({ from, to }) => {
   }, [from, to]);
 
   const data = {
-    labels: pieData && pieData?.data?.map((item) => item.name),
+    labels: pieData.data?.map((item) => item.name),
     datasets: [
       {
-        label: pieData && pieData?.data?.value,
-        data: pieData && pieData?.data?.map((item) => item.value),
+        label: pieData.data?.value,
+        data: pieData.data?.map((item) => item.value),
         backgroundColor: [
           "rgba(79, 121, 225,1)",
           "rgba(74, 169, 247,1)",

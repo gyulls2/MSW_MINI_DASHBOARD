@@ -76,9 +76,9 @@ const LineChart = ({ from, to }) => {
     },
   };
 
-  const labels =
-    lineData &&
-    lineData?.times?.map((item) => timeFormat(new Date(item * 1000)));
+  const labels = lineData?.times?.map((item) =>
+    timeFormat(new Date(item * 1000))
+  );
 
   function timeFormat(date) {
     let hour = date.getHours();

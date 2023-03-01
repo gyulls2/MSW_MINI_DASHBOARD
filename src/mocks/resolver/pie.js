@@ -38,7 +38,7 @@ export const pieResolver = async (req, res, ctx) => {
     return res(ctx.status(422), ctx.json({ errorMessage: 'Bad request body.' }));
   }
   // const interval = 10 * 1000;
-  const interval = 10 * 10;
+  const interval =  0.1 * 1000;
   const standardToFrom = from - standardStartTime;
   const indexFrom = Math.ceil(standardToFrom % 360);
   const resultPies = { data: [], unit: 'bytes' };

@@ -23,7 +23,7 @@ const timeseriesDataGet = async (req, res, ctx) => {
   // 기준시간 2023-02-23 00:00:00
   const standardUnixTime = new Date("2023-02-23 00:00:00").getTime();
   // const interval = 10 * 1000;
-  const interval = 10 * 10;
+  const interval = 0.1 * 1000;
   const range = 720;
   const rangeTime = range * interval;
   const standardToFrom = from - standardUnixTime;
