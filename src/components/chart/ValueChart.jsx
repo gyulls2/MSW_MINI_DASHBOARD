@@ -39,7 +39,7 @@ const ValueChart = ({ from, to }) => {
       <div className="chartContainer">
         <div className="handle">
           <StyledP>
-            <span style={spanStyle}>{valueData.value}</span> Mib
+            <span style={spanStyle}>{valueData.value}</span> {valueData.unit}
           </StyledP>
         </div>
       </div>
@@ -51,7 +51,7 @@ export default ValueChart;
 
 // styled-components
 const StyledP = styled.p`
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
   text-align: center;
   position: relative;

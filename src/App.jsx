@@ -7,6 +7,7 @@ import ChartSelector from "./components/chartSelector/ChartSelector";
 import TimeSelector from "./components/timeSelector/TimeSelector";
 import useInterval from "./hooks/useInterval";
 import styled from "styled-components";
+import CurrentTime from "./components/timeSelector/CurrentTime";
 
 function App() {
   // const from = 1646035200; // 2022-02-28 00:00:00 UTC
@@ -41,7 +42,6 @@ function App() {
   }
 
   function chartSelectorHandler(isVisible, title) {
-    console.log(title);
     if (title === "LineChart") {
       if (isVisible) lineRef.current.style = "display:none";
       else lineRef.current.style = "display:block";
@@ -57,6 +57,7 @@ function App() {
   return (
     <div className="App">
       <section className="controllerSection">
+        <CurrentTime />
         <TimeSelector timeSelectorHandler={timeSelectorHandler} />
         <ChartSelector
           title="LineChart"

@@ -6,7 +6,6 @@ const ChartSelector = ({ title, chartSelectorHandler }) => {
 
   const setVisibleHandler = () => {
     setIsVisible(isVisible ? false : true);
-    console.log(isVisible);
     chartSelectorHandler(isVisible, title);
   };
 
@@ -27,10 +26,9 @@ export default ChartSelector;
 const StyledDIV = styled.div`
   width: 100%;
   height: 90px;
-  margin-top: 30px;
+  margin-top: 40px;
   border-radius: 10px;
   font-size: 1.5rem;
-  font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;

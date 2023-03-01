@@ -26,12 +26,11 @@ const TimeSelector = ({ timeSelectorHandler }) => {
 
   return (
     <div>
-      <Box sx={{ width: "90%", marginBottom: "50px" }}>
+      <Box sx={{ width: "95%", marginBottom: "60px" }}>
         <Slider
           aria-label="Restricted values"
           defaultValue={100}
           step={null}
-          valueLabelDisplay="auto"
           marks={marks}
           onChange={getTimeValue}
         />
