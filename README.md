@@ -28,7 +28,7 @@
   - 값 차트의 value가 500 이상일 때, 값의 색상이 변화합니다.
   - 마우스 드래그 앤 드롭으로 차트의 위치와 크기를 원하는 대로 조작할 수 있습니다.
 - 기술 스택
-  - React, Javascript, Chart.js, Styled-components, MUI
+  - <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white"/> <img src="https://img.shields.io/badge/Chart.js-FF6384?style=flat&logo=Chart.js&logoColor=white"/> <img src="https://img.shields.io/badge/Styled%20Components-DB7093?style=flat&logo=styled-components&logoColor=white"/> <img src="https://img.shields.io/badge/MUI-007FFF?style=flat&logo=MUI&logoColor=white"/>
 
 ## 3. 작업 기록
 
