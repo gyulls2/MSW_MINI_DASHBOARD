@@ -41,7 +41,7 @@
 **📍 02.27**
 
 - MSW(Mock Service Worker) 라이브러리 설치
-- 서비스 워커 생성 : `setupWorker()`
+- 서비스 워커 생성 : `setupWorker()`<br/>
   💥 `handler.js` 파일 작동 시 다음과 같은 오류 발생
 
   > Uncaught Invariant Violation: [MSW] Failed to construct "SetupWorkerApi" given an Array of request handlers. `Make sure you spread the request handlers` when calling the respective setup function.
