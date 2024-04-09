@@ -1,3 +1,6 @@
+# 📊 MSW_MINI_DASHBOARD
+<img src="https://github.com/gyulls2/MSW_MINI_DASHBOARD/blob/main/public/msw_mini_dashboard_readme.gif" alt="msw_mini_dashboard 랜딩페이지" />
+
 ## 1. 실행 방법
 
 1. 레포지토리 클론
